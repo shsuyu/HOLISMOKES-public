@@ -104,6 +104,8 @@ class redshifted_mlcs():
     def __init__(self,N_sim,kappa,gamma,s,source_redshift_microlensing_calculation,source_redshift_output,lens_redshift):
 
         self.N_sim = N_sim
+                
+        print self.N_sim
         self.kappa = kappa
         self.gamma = gamma
         self.s = s
@@ -124,7 +126,7 @@ class redshifted_mlcs():
 
 
 
-    def f_get_microlensed_lightcurve(self):
+    def f_get_microlensed_lightcurve(self,amount_of_random_microlensing_positions):
 
         d_store_results = {}
         
@@ -180,8 +182,8 @@ class redshifted_mlcs():
                     d_flux = pickle.load(handle)
                 d_flux_time_bin[time_bin] = d_flux
     
-            for config in range(0,self.N_sim):
-            #for config in range(0,3): 
+            #for config in range(0,self.N_sim):
+            for config in range(0,amount_of_random_microlensing_positions): 
                 d_mag = {}
                 for filter_ in self.filters:
                     d_mag[filter_] = []      
@@ -232,7 +234,8 @@ class redshifted_mlcs():
         with open(safe_pickle + ".pickle", "wb") as handle:
             pickle.dump(d_store_results, handle, protocol=pickle.HIGHEST_PROTOCOL) 
     
-    def f_get_microlensed_spectra(self):
+    def f_get_microlensed_spectra(self,amount_of_random_microlensing_positions):
+
         
         for supernova_model in self.SN_models:
             print supernova_model
@@ -290,8 +293,9 @@ class redshifted_mlcs():
         
             d_store_modified_flux = {}
             for time_bin in self.time_bins:
-                for config in range(0,self.N_sim):
-                #for config in range(0,3):                   
+                
+                #for config in range(0,self.N_sim):
+                for config in range(0,amount_of_random_microlensing_positions):                   
                     d_flux = d_flux_time_bin[time_bin]
     
                     if config == 0:
@@ -342,14 +346,16 @@ image_number=1
 
 
 
-input_data_path = ".../data_release_holismokes7/" 
-output_data_path = ".../data_release_holismokes7_output/" 
+input_data_path = "./" 
+output_data_path = "./data_release_holismokes7_output/" 
 
 kappa, gamma, s, source_redshift_microlensing_calculation, lens_redshift = public_spectra_light_curve.f_get_system(system_number=system_number,image_number=image_number)
 
 
 source_redshift_output = source_redshift_microlensing_calculation # exact microlensing calculation
-source_redshift_output = 0 # rest frame, microlensing approximated see readme
+#source_redshift_output = 0 # rest frame, microlensing approximated see readme
+
+amount_of_random_microlensing_positions = 5 # values up to 10000 are possible (long runtime)
 
 mlc = redshifted_mlcs(N_sim = 10000, kappa = kappa,
                       gamma = gamma, s = s,
@@ -357,9 +363,9 @@ mlc = redshifted_mlcs(N_sim = 10000, kappa = kappa,
                       source_redshift_output = source_redshift_output,
                       lens_redshift = lens_redshift)
 
-mlc.f_get_microlensed_lightcurve()
+mlc.f_get_microlensed_lightcurve(amount_of_random_microlensing_positions = amount_of_random_microlensing_positions)
 
-mlc.f_get_microlensed_spectra()
+mlc.f_get_microlensed_spectra(amount_of_random_microlensing_positions = amount_of_random_microlensing_positions)
 
 
 
