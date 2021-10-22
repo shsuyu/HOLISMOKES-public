@@ -210,7 +210,7 @@ if __name__ == "__main__":
     
     # get microlensed and macrolensed spectra
     micro_config = 9999 # random micro position, values from 0 to 9999
-    time_bin = 6 #use values from 6 to 44
+    time_bin = 6 #use values from 6 to 43
     wavelength, flux_micro, time_spectra_micro = mlc.f_load_microlensed_flux(micro_config = micro_config, time_bin = time_bin)
     
     wavelength, flux_macro, time_spectra_macro = mlc.f_load_macrolensed_flux(time_bin = time_bin)
