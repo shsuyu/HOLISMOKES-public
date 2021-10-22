@@ -346,7 +346,7 @@ image_number=1
 
 
 
-input_data_path = "./" 
+input_data_path = "./data_release_holismokes7/" 
 output_data_path = "./data_release_holismokes7_output/" 
 
 kappa, gamma, s, source_redshift_microlensing_calculation, lens_redshift = public_spectra_light_curve.f_get_system(system_number=system_number,image_number=image_number)
