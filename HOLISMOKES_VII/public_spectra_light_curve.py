@@ -183,7 +183,7 @@ if __name__ == "__main__":
     image_number=4# for the options see the readme file
     supernova_model="me" # available options "me", "n1", "su", "ww"
     
-    input_data_path = ".../data_release_holismokes7/" 
+    input_data_path = "./data_release_holismokes7/" 
     
     kappa, gamma, s, source_redshift, lens_redshift = f_get_system(system_number=system_number,image_number=image_number)
     
