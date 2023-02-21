@@ -336,7 +336,7 @@ class LensModelNet(object):
 
         print('Saving table...')
         np.save(self.out+'_median', medians)
-        np.save(self.out+'_sigma', sigma)
+        np.save(self.out+'_sigma', sigmas)
         print('Table saved under:\n\t'+str(self.out)+'_median.npy\n\t'+str(self.out)+'_sigma.npy')
 
 #write README
