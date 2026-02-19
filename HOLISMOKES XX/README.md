@@ -1,0 +1,1 @@
+SN Winny animation folder
